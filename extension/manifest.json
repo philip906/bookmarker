@@ -1,0 +1,26 @@
+{
+    "author": "Philip Yates",
+    "name": "Sociable Labs: Bookmarker",
+    "version": "1.0.2",
+    "manifest_version": 2,
+    "icons": {
+        "16": "images/sl-logo.png",
+        "48": "images/sl-logo.png",
+        "128": "images/sl-logo.png"
+    },
+    "description": "A tool Sociable Labs tool for organizing/synchronizing your bookmarks.",
+    "browser_action": {
+        "default_icon": "images/sl-logo.png",
+        "default_popup": "popup.html",
+        "default_title": "Sociable Labs: Bookmarker 1.6.1"
+    },
+    "content_scripts": [],
+    "web_accessible_resources": [
+        "images/edit.png"
+    ],
+    "permissions": [
+        "http://*/",
+        "https://*/"
+    ],
+    "background": {}
+}

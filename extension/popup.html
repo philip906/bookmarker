@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-csp>
+<head>
+
+    <!-- libraries -->
+    <script type="text/javascript" src="scripts/lib/angular/angular.min.js"></script>
+
+    <!-- bootstrap -->
+    <script type="text/javascript" src="scripts/app.js"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/global.css" />
+
+
+    <!-- services -->
+    <script type="text/javascript" src="scripts/services/api-service.js"></script>
+    <script type="text/javascript" src="scripts/services/bookmark-service.js"></script>
+    <script type="text/javascript" src="scripts/services/storage-service.js"></script>
+
+    <!-- controllers -->
+    <script type="text/javascript" src="scripts/controllers/bookmarker-controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/bookmark-controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/settings-controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/update-controller.js"></script>
+
+    <!-- directives -->
+    <script type="text/javascript" src="scripts/directives/update-lbl-directive.js"></script>
+    <script type="text/javascript" src="scripts/directives/option-lbl-directive.js"></script>
+    <script type="text/javascript" src="scripts/directives/option-action-directive.js"></script>
+
+    <!-- filters -->
+    <script type="text/javascript" src="scripts/filters/has-value-filter.js"></script>
+
+
+</head>
+<body ng-controller="BookmarkerController">
+
+    <div id="menu-options-container">
+        <div id="update-option-container" ng-controller="UpdateController" >
+            <div sl-update-lbl sl-arg-current-mode="currentMode" sl-arg-next-mode="{{'edit'}}" sl-arg-title="{{'edit'}}" sl-arg-is-default-mode="{{false}}" ></div>
+            <div sl-update-lbl sl-arg-current-mode="currentMode" sl-arg-next-mode="{{'view'}}" sl-arg-title="{{'save'}}" sl-arg-is-default-mode="{{true}}" ></div>
+        </div>
+        <div class="menu-option" ng-controller="BookmarkController" >
+            <div sl-option-lbl sl-arg-title="{{'Bookmarks'}}" ></div>
+            <div class="more-options-container" >
+                <script type="text/ng-template" id="bookmarkTemplate">
+
+                    <div ng-if="bookmark.bookmarks.length && !bookmark.bookmarks[0].url" class="menu-option">
+                        <div sl-option-lbl sl-arg-title="{{bookmark.name}}" ></div>
+                        <div ng-repeat="bookmark in bookmark.bookmarks | orderBy:'bookmark.name'" ng-include="'bookmarkTemplate'" >
+                        </div>
+                    </div>
+                    <div ng-if="bookmark.bookmarks.length && bookmark.bookmarks[0].url" class="menu-option">
+                        <div sl-option-lbl sl-arg-title="{{bookmark.name}}" ></div>
+                        <div class="option-actions" >
+                            <a ng-repeat="link in bookmark.bookmarks | orderBy:'link.name'" target="_blank" href="{{link.url}}" class="button" >{{link.name}}</a>
+                        </div>
+                        </div>
+                    </div>
+
+                </script>
+                <div ng-include="'bookmarkTemplate'" ng-repeat="bookmark in bookmarks"></div>
+            </div>
+        </div>
+        <div class="menu-option" ng-controller="SettingsController" >
+            <div sl-option-lbl sl-arg-title="{{'Settings'}}" ></div>
+            <div class="more-options-container" >
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
+
+
